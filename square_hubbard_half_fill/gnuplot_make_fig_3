@@ -1,0 +1,9 @@
+set xrange [:]
+set yrange [:]
+set xlabel "U"
+set ylabel "gap"
+
+set term png
+set output "fig_3_gap.png"
+
+p "catdatgap_n0.5_af" u 1:2 w lp ti ""

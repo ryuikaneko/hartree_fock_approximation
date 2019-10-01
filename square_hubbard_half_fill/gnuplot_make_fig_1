@@ -1,0 +1,9 @@
+set xrange [:]
+set yrange [:]
+set xlabel "U"
+set ylabel "energy"
+
+set term png
+set output "fig_1_ene.png"
+
+p "catdatene_n0.5_af" u 1:3 w lp ti ""
