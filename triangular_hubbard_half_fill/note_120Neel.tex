@@ -1,0 +1,255 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{bm}
+
+%\usepackage{color}
+%\usepackage{wrapfig}
+
+% parameters for figure
+\renewcommand{\topfraction}{1.1}
+\renewcommand{\bottomfraction}{1.1}
+\renewcommand{\dbltopfraction}{1.1}
+\renewcommand{\textfraction}{-0.1}
+\renewcommand{\floatpagefraction}{1.1}
+\renewcommand{\dblfloatpagefraction}{1.1}
+\setcounter{topnumber}{5}
+\setcounter{bottomnumber}{5}
+\setcounter{totalnumber}{10}
+% end of parameters for figure
+
+\begin{document}
+\allowdisplaybreaks
+
+%----
+
+\title{Hartree-Fock approximation:
+triangular Hubbard model at half filling ($n=1$)}
+\author{}
+\date{}
+\maketitle
+
+\section{Mean-field Hamiltonian}
+
+\begin{eqnarray}
+ H &=&
+  - t \sum_{\left<ij\right>,\sigma} c_{i,\sigma}^{\dagger} c_{j,\sigma}
+  + U\sum_{i} n_{i,\uparrow} n_{i,\downarrow}
+\\
+ &\downarrow&
+\nonumber
+\\
+ H_{\mathrm{MF}} &=&
+  \sum_{k,\sigma} \epsilon_{k} c_{k,\sigma}^{\dagger} c_{k,\sigma}
+\nonumber
+\\
+ && + U\sum_{i} \left[
+   \left<n_{i,\uparrow}\right> n_{i,\downarrow}
+   + \left<n_{i,\downarrow}\right> n_{i,\uparrow}
+  \right]
+\nonumber
+\\
+ && - U\sum_{i} \left[
+   \left<c_{i,\uparrow}^{\dagger}c_{i,\downarrow}\right> c_{i,\downarrow}^{\dagger}c_{i,\uparrow}
+   + \left<c_{i,\downarrow}^{\dagger}c_{i,\uparrow}\right> c_{i,\uparrow}^{\dagger}c_{i,\downarrow}
+  \right]
+\nonumber
+\\
+ && + \mathrm{const.}
+\\
+ \mathrm{const.} &=&
+  - U\sum_{i} \left<n_{i,\uparrow}\right> \left<n_{i,\downarrow}\right>
+\nonumber
+\\
+ && + U\sum_{i} \left<c_{i,\uparrow}^{\dagger}c_{i,\downarrow}\right> \left<c_{i,\downarrow}^{\dagger}c_{i,\uparrow}\right>
+\\
+ \epsilon_{k} &=& -2t \left[\cos k_x + \cos k_y + \cos (k_x+k_y)\right]
+\end{eqnarray}
+
+
+\section{Order parameter}
+
+Assuming the 120$^\circ$ Neel state
+\begin{eqnarray}
+ \left<S_i^x\right> &=& m\, \mathrm{Re}\, e^{iQR_i}
+\\
+ \left<S_i^y\right> &=& m\, \mathrm{Im}\, e^{iQR_i}
+\\
+ \left<S_i^z\right> &=& 0
+\\
+ Q &=& (2\pi/3,2\pi/3),
+\end{eqnarray}
+we obtain
+\begin{eqnarray}
+ \left<n_{i,\uparrow}\right> &=& \left<n_{i,\downarrow}\right> = n
+\\
+ \left<c_{i,\uparrow}^{\dagger}c_{i,\downarrow}\right>
+ &=& \left<S_{i}^{+}\right>
+  = \left<S_{i}^{x}\right> + i \left<S_{i}^{y}\right>
+  = m\, e^{iQR_i}
+\\
+ \left<c_{i,\downarrow}^{\dagger}c_{i,\uparrow}\right>
+ &=& \left<S_{i}^{-}\right>
+  =  \left<S_{i}^{+}\right>^{*}
+\end{eqnarray}
+
+
+\section{Hamiltonian to be diagonalized}
+
+\begin{eqnarray}
+ H_{\mathrm{MF}} &=&
+  \sum_{k,\sigma} \epsilon_{k} c_{k,\sigma}^{\dagger} c_{k,\sigma}
+\nonumber
+\\
+ && + Un \sum_{i} \left(
+   n_{i,\downarrow}
+   + n_{i,\uparrow}
+  \right)
+\nonumber
+\\
+ && - Um \sum_{i} \left(
+   e^{iQR_i} c_{i,\downarrow}^{\dagger}c_{i,\uparrow}
+   + e^{-iQR_i} c_{i,\uparrow}^{\dagger}c_{i,\downarrow}
+  \right)
+\nonumber
+\\
+ && + \mathrm{const.}
+\nonumber
+\\
+ &=& \sum_{k,\sigma} \left( \epsilon_{k} + Un \right) c_{k,\sigma}^{\dagger} c_{k,\sigma}
+\nonumber
+\\
+ && - Um \sum_{k} \left(
+   c_{k,\downarrow}^{\dagger}c_{k-Q,\uparrow}
+   + c_{k,\uparrow}^{\dagger}c_{k+Q,\downarrow}
+  \right)
+\nonumber
+\\
+ && + \mathrm{const.}
+\nonumber
+\\
+ &=&
+  \sum_{k,\sigma}^{\mathrm{RBZ}}
+  \begin{pmatrix}
+   c_{k,\uparrow}^{\dagger} &
+   c_{k+Q,\uparrow}^{\dagger} &
+   c_{k+2Q,\uparrow}^{\dagger} &
+   c_{k,\downarrow}^{\dagger} &
+   c_{k+Q,\downarrow}^{\dagger} &
+   c_{k+2Q,\downarrow}^{\dagger}
+  \end{pmatrix}
+ \nonumber
+\\
+ &&
+%  \begin{pmatrix}
+  \left(
+  \begin{array}{*3{c}|*3{c}}
+   \tilde\epsilon_{k} & & & & \Delta & \\
+   & \tilde\epsilon_{k+Q} & & & & \Delta \\
+   & & \tilde\epsilon_{k+2Q} & \Delta & & \\
+   \cline{1-6}
+   & & \Delta & \tilde\epsilon_{k} & & \\
+   \Delta & & & & \tilde\epsilon_{k+Q} & \\
+   & \Delta & & & & \tilde\epsilon_{k+2Q} \\
+  \end{array}
+  \right)
+%  \end{pmatrix}
+  \begin{pmatrix}
+   c_{k,\uparrow} \\
+   c_{k+Q,\uparrow} \\
+   c_{k+2Q,\uparrow} \\
+   c_{k,\downarrow} \\
+   c_{k+Q,\downarrow} \\
+   c_{k+2Q,\downarrow}
+  \end{pmatrix}
+\nonumber
+\\
+ && + \mathrm{const.}
+\end{eqnarray}
+Here,
+\begin{eqnarray}
+ \tilde\epsilon_k &=& \epsilon_{k} + Un
+\\
+ \Delta &=& -Um
+\\
+ \mathrm{const.} &=& -U n^2 N_s + U m^2 N_s
+\end{eqnarray}
+The RBZ is given as
+\begin{eqnarray}
+&& k_x + k_y < \frac{2\pi}{3},~
+   k_x + k_y > -\frac{2\pi}{3},~ \\
+&& k_x - 2k_y < \frac{5\pi}{3},~
+   k_x - 2k_y > -\frac{5\pi}{3},~ \\
+&& 2k_x - k_y < \frac{5\pi}{3},~ \mbox{~and~}~
+   2k_x - k_y > -\frac{5\pi}{3}
+\end{eqnarray}
+so that the number of $k$ points is $N_s/3$.
+
+
+\section{Self-consistent equation}
+
+\begin{eqnarray}
+ n
+ &=& \frac{1}{2N_s} \sum_{i,\sigma} \left< n_{i,\sigma} \right>
+\nonumber
+\\
+ &=& \frac{1}{2N_s} \sum_{k,\sigma} \left< c_{k,\sigma}^{\dagger} c_{k,\sigma} \right>
+\nonumber
+\\
+  &=& \frac{1}{2N_s} \sum_{k,\sigma}^{\mathrm{RBZ}} \left[
+       \left< c_{k,\sigma}^{\dagger} c_{k,\sigma} \right>
+       + \left< c_{k+Q,\sigma}^{\dagger} c_{k+Q,\sigma} \right>
+       + \left< c_{k+2Q,\sigma}^{\dagger} c_{k+2Q,\sigma} \right>
+      \right]
+\\
+ m
+ &=& \frac{1}{2N_s} \sum_{i} \left[
+      \left< S_{i}^{+} \right> e^{-iQR_i}
+      + \left< S_{i}^{-} \right> e^{iQR_i}
+     \right]
+\nonumber
+\\
+ &=& \frac{1}{2N_s} \sum_{k} \left[
+      \left< c_{k,\uparrow}^{\dagger} c_{k+Q,\downarrow} \right>
+      + \left< c_{k,\downarrow}^{\dagger} c_{k-Q,\uparrow} \right>
+     \right]
+\nonumber
+\\
+ &=& \frac{1}{2N_s} \sum_{k}^{\mathrm{RBZ}} \Bigl[
+      \left< c_{k,\uparrow}^{\dagger} c_{k+Q,\downarrow} \right>
+      + \left< c_{k+Q,\uparrow}^{\dagger} c_{k+2Q,\downarrow} \right>
+      + \left< c_{k+2Q,\uparrow}^{\dagger} c_{k,\downarrow} \right>
+\nonumber
+\\
+ &&
+      + \left< c_{k,\downarrow}^{\dagger} c_{k+2Q,\uparrow} \right>
+      + \left< c_{k+Q,\downarrow}^{\dagger} c_{k,\uparrow} \right>
+      + \left< c_{k+2Q,\downarrow}^{\dagger} c_{k+Q,\uparrow} \right>
+     \Bigr]
+\end{eqnarray}
+
+
+\section{Comparison with the previous result}
+
+For $N_s=6\times 6$ under periodic-periodic boundary condition, we obtain
+\begin{table}[h!]
+\centering
+\begin{tabular}{c|c}
+\hline
+ total energy & -0.4229593004 \\
+ Coulomb energy & 0.3744104588 \\
+ charge $n$ & 0.5 \\
+ magnetization $m$ & 0.4610411632 \\
+\hline
+\end{tabular}
+\end{table}
+
+The energy $E_{\mathrm{tot}}N_s = -15.22653481$ is consistent with the previous mean-field result
+$E_{\mathrm{tot}}N_s = -15.226$ by Maruyama et al.\
+[J.\ Phys.: Conf.\ Ser.\ {\bf 320}, 012061].
+
+
+%----
+
+\end{document}
