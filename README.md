@@ -13,7 +13,11 @@
       [DOI:10.1088/1742-6596/320/1/012061](https://doi.org/10.1088/1742-6596/320/1/012061)
 
 * Examples
+
   * Square Hubbard model
+
 ![energy](https://github.com/ryuikaneko/hartree_fock_approximation/blob/master/square_hubbard_half_fill/fig_1_ene.png "energy")
+
 ![magnetization](https://github.com/ryuikaneko/hartree_fock_approximation/blob/master/square_hubbard_half_fill/fig_2_mag.png "magnetization")
+
 ![gap](https://github.com/ryuikaneko/hartree_fock_approximation/blob/master/square_hubbard_half_fill/fig_3_gap.png "gap")
